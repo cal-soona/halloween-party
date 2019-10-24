@@ -6,7 +6,12 @@
       </v-overlay>
       <v-card>
         <v-expand-transition>
-          <v-form v-if="isSignIn" v-model="signinValid" lazy-validation ref="signinForm">
+          <v-form
+            v-if="isSignIn"
+            v-model="signinValid"
+            lazy-validation
+            ref="signinForm"
+          >
             <v-card-text>
               <h3>your digits?</h3>
               <v-text-field
@@ -20,14 +25,21 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="error" text id="sign-in-button" @click="signIn">get spooky</v-btn>
+              <v-btn color="error" text id="sign-in-button" @click="signIn"
+                >get spooky</v-btn
+              >
             </v-card-actions>
           </v-form>
         </v-expand-transition>
       </v-card>
       <v-card>
         <v-expand-transition>
-          <v-form v-if="isVerify" v-model="verifyValid" lazy-validation ref="verifyForm">
+          <v-form
+            v-if="isVerify"
+            v-model="verifyValid"
+            lazy-validation
+            ref="verifyForm"
+          >
             <v-card-text>
               <h3>enter your verification code</h3>
               <v-text-field
@@ -50,7 +62,9 @@
     <v-card>
       <v-card-actions>
         <v-card-text>haven't got spooky yet?</v-card-text>
-        <v-btn color="primary" text @click="$router.replace('signup')">Sign Up</v-btn>
+        <v-btn color="primary" text @click="$router.replace('signup')"
+          >Sign Up</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-row>

@@ -1,21 +1,26 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6">
-      <div v-show="false">{{profiles}}</div>
+      <div v-show="false">{{ profiles }}</div>
       <v-expand-x-transition mode="out-in" v-if="currentProfile">
         <div>
           <v-subheader>spooky, dope, or nah?</v-subheader>
           <v-card max-width="344" class="mx-auto" :key="currentProfile.id">
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="headline">{{currentProfile.name}}</v-list-item-title>
+                <v-list-item-title class="headline">{{
+                  currentProfile.name
+                }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
             <v-img :src="currentProfile.imageURL" height="50vh">
               <template v-slot:placeholder>
                 <v-row class="fill-height ma-0" align="center" justify="center">
-                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                  <v-progress-circular
+                    indeterminate
+                    color="grey lighten-5"
+                  ></v-progress-circular>
                 </v-row>
               </template>
             </v-img>
@@ -36,9 +41,9 @@
       </v-expand-x-transition>
       <div v-else>
         <h1>here's where everyone stands.</h1>
-        <h2
-          v-if="myProfile.superLeft > 0"
-        >you have {{ myProfile.superLeft }} more votes to pick your favorites!</h2>
+        <h2 v-if="myProfile.superLeft > 0">
+          you have {{ myProfile.superLeft }} more votes to pick your favorites!
+        </h2>
         <h3>check back later for more spooky costumes</h3>
 
         <v-slide-y-transition group>
@@ -46,15 +51,27 @@
             <v-card max-width="344" class="mx-auto">
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="headline">{{p.name}}</v-list-item-title>
-                  <v-list-item-subtitle>rank: {{ sortedProfiles.indexOf(p) + 1 }}</v-list-item-subtitle>
+                  <v-list-item-title class="headline">{{
+                    p.name
+                  }}</v-list-item-title>
+                  <v-list-item-subtitle
+                    >rank:
+                    {{ sortedProfiles.indexOf(p) + 1 }}</v-list-item-subtitle
+                  >
                 </v-list-item-content>
               </v-list-item>
 
               <v-img :src="p.imageURL" height="50vh">
                 <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
-                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular>
                   </v-row>
                 </template>
               </v-img>

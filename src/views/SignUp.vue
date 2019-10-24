@@ -6,10 +6,20 @@
       </v-overlay>
       <v-card>
         <v-expand-transition>
-          <v-form v-if="isCreate" v-model="signupValid" lazy-validation ref="createForm">
+          <v-form
+            v-if="isCreate"
+            v-model="signupValid"
+            lazy-validation
+            ref="createForm"
+          >
             <v-card-text>
               <h3>who are you tonight?</h3>
-              <v-text-field v-model="name" :rules="nameRules" label="costume name" required></v-text-field>
+              <v-text-field
+                v-model="name"
+                :rules="nameRules"
+                label="costume name"
+                required
+              ></v-text-field>
               <h3>what do you look like?</h3>
               <v-expand-transition mode="out-in">
                 <form
@@ -34,8 +44,15 @@
                 <v-col v-else>
                   <v-img :src="imageURL" contain height="50vh">
                     <template v-slot:placeholder>
-                      <v-row class="fill-height ma-0" align="center" justify="center">
-                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      <v-row
+                        class="fill-height ma-0"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-progress-circular
+                          indeterminate
+                          color="grey lighten-5"
+                        ></v-progress-circular>
                       </v-row>
                     </template>
                   </v-img>
@@ -43,7 +60,10 @@
               </v-expand-transition>
 
               <h3>say something clever...</h3>
-              <v-text-field v-model="description" label="tag line"></v-text-field>
+              <v-text-field
+                v-model="description"
+                label="tag line"
+              ></v-text-field>
 
               <h3>your digits?</h3>
               <v-text-field
@@ -57,14 +77,21 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="error" text id="sign-in-button" @click="signUp">get spooky</v-btn>
+              <v-btn color="error" text id="sign-in-button" @click="signUp"
+                >get spooky</v-btn
+              >
             </v-card-actions>
           </v-form>
         </v-expand-transition>
       </v-card>
       <v-card>
         <v-expand-transition>
-          <v-form v-if="isVerify" v-model="verifyValid" lazy-validation ref="verifyForm">
+          <v-form
+            v-if="isVerify"
+            v-model="verifyValid"
+            lazy-validation
+            ref="verifyForm"
+          >
             <v-card-text>
               <h3>enter your verification code</h3>
               <v-text-field
@@ -86,7 +113,9 @@
     <v-card>
       <v-card-actions>
         <v-card-text>already got spooky?</v-card-text>
-        <v-btn color="primary" text @click="$router.replace('signin')">Sign In</v-btn>
+        <v-btn color="primary" text @click="$router.replace('signin')"
+          >Sign In</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-row>
