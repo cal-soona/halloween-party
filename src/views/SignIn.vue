@@ -105,6 +105,7 @@ export default {
         }
       );
     });
+    this.$vuetify.goTo(0);
   },
   methods: {
     reset() {
