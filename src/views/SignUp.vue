@@ -75,6 +75,12 @@
         </v-expand-transition>
       </v-card>
     </v-col>
+    <v-card>
+      <v-card-actions>
+        <v-card-text>already got spooky?</v-card-text>
+        <v-btn color="primary" text @click="$router.replace('signin')">Sign In</v-btn>
+      </v-card-actions>
+    </v-card>
   </v-row>
 </template>
 
