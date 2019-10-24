@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-app-bar app>
+        <img :src="require('./assets/title.png')" height="32"/>
+      <v-spacer></v-spacer>
+      <img :src="require('./assets/logo.jpeg')" height="56" style="margin-right: -16px;"/>
+    </v-app-bar>
+
+    <v-content>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import firebase from "firebase";
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  name: "App",
+  mounted() {
+    var self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user && self.$route.name == "index") {
+        self.$router.replace("home");
+      } else if (!user) {
+        self.$router.replace("signup");
+      }
+    });
+  },
+  created() {
+    this.$vuetify.theme.dark = true;
+  }
+};
+</script>
