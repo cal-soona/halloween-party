@@ -123,7 +123,10 @@
 
 <script>
 import { db } from "../firebase";
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 const LOGIN_STATUS_CREATE = 0,
   LOGIN_STATUS_VERIFY = 1;

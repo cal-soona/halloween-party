@@ -71,8 +71,8 @@
 </template>
 
 <script>
-//import { db } from "../firebase";
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 const LOGIN_STATUS_SIGNIN = 0,
   LOGIN_STATUS_VERIFY = 1;
