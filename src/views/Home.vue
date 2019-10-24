@@ -12,12 +12,18 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-img :src="currentProfile.imageURL" height="50vh"></v-img>
+            <v-img :src="currentProfile.imageURL" height="50vh">
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
 
             <v-card-text>{{ currentProfile.description }}</v-card-text>
 
             <v-card-actions>
-              <v-btn color='error' x-large icon @click="hate">
+              <v-btn color="error" x-large icon @click="hate">
                 <v-icon x-large>mdi-thumb-down</v-icon>
               </v-btn>
               <v-spacer></v-spacer>
@@ -45,15 +51,27 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-img :src="p.imageURL" height="50vh"></v-img>
+              <v-img :src="p.imageURL" height="50vh">
+                <template v-slot:placeholder>
+                  <v-row class="fill-height ma-0" align="center" justify="center">
+                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                  </v-row>
+                </template>
+              </v-img>
 
               <v-card-text>{{ p.description }}</v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn rounded color="error" x-large @click="superLike(p.id)" :disabled="myProfile.superLeft == 0">
+                <v-btn
+                  rounded
+                  color="error"
+                  x-large
+                  @click="superLike(p.id)"
+                  :disabled="myProfile.superLeft == 0"
+                >
                   <v-icon x-large>mdi-heart</v-icon>
-                  <span>  {{ myProfile.superLeft }} left</span>
+                  <span>{{ myProfile.superLeft }} left</span>
                 </v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>

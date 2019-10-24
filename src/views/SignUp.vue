@@ -11,29 +11,37 @@
               <h3>who are you tonight?</h3>
               <v-text-field v-model="name" :rules="nameRules" label="costume name" required></v-text-field>
               <h3>what do you look like?</h3>
-              <form
-                enctype="multipart/form-data"
-                novalidate
-                v-if="isInitial || isSaving || isFailed"
-              >
-                <div class="dropbox">
-                  <input
-                    type="file"
-                    :name="uploadFieldName"
-                    :disabled="isSaving"
-                    @change="filesChange($event.target)"
-                    accept="image/*"
-                    class="input-file"
-                  />
-                  <p v-if="isInitial">tap here to upload a photo</p>
-                  <p v-if="isFailed">something went wrong... try again?</p>
-                  <p v-if="isSaving">{{ uploadProgress }}%</p>
-                </div>
-              </form>
-              <div v-else>
-                <v-img v-if="imageURL" :src="imageURL" contain max-height="50vh" />
-                <v-subheader v-else>finishing up hang in there!</v-subheader>
-              </div>
+              <v-expand-transition mode="out-in">
+                <form
+                  enctype="multipart/form-data"
+                  novalidate
+                  v-if="isInitial || isSaving || isFailed"
+                >
+                  <div class="dropbox">
+                    <input
+                      type="file"
+                      :name="uploadFieldName"
+                      :disabled="isSaving"
+                      @change="filesChange($event.target)"
+                      accept="image/*"
+                      class="input-file"
+                    />
+                    <p v-if="isInitial">tap here to upload a photo</p>
+                    <p v-if="isFailed">something went wrong... try again?</p>
+                    <p v-if="isSaving">{{ uploadProgress }}%</p>
+                  </div>
+                </form>
+                <v-col v-else>
+                  <v-img :src="imageURL" contain height="50vh">
+                    <template v-slot:placeholder>
+                      <v-row class="fill-height ma-0" align="center" justify="center">
+                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                      </v-row>
+                    </template>
+                  </v-img>
+                </v-col>
+              </v-expand-transition>
+
               <h3>say something clever...</h3>
               <v-text-field v-model="description" label="tag line"></v-text-field>
 
