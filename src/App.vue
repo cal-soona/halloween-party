@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app v-ripple>
       <img :src="require('./assets/title.png')" height="32" />
       <v-spacer></v-spacer>
       <img

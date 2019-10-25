@@ -2,15 +2,20 @@
   <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6">
       <div v-show="false">{{ profiles }}</div>
-      <v-expand-x-transition mode="out-in" v-if="currentProfile">
-        <div>
-          <v-subheader>spooky, dope, or nah?</v-subheader>
-          <v-card max-width="344" class="mx-auto" :key="currentProfile.id">
+      <v-subheader v-if="currentProfile">spooky, dope, or nah?</v-subheader>
+      <v-fade-transition>
+        <v-expand-x-transition mode="out-in" v-if="currentProfile">
+          <v-card
+            max-width="344"
+            class="mx-auto"
+            :key="currentProfile.id"
+            elevation="20"
+          >
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title class="headline">{{
-                  currentProfile.name
-                }}</v-list-item-title>
+                <v-list-item-title class="headline">
+                  {{ currentProfile.name }}
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -37,65 +42,65 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+        </v-expand-x-transition>
+        <div v-else>
+          <h1>here's where everyone stands.</h1>
+          <h2 v-if="myProfile.superLeft > 0">
+            you have {{ myProfile.superLeft }} more votes to pick your
+            favorites!
+          </h2>
+          <h3>check back later for more spooky costumes</h3>
+
+          <v-slide-y-transition group>
+            <v-col v-for="p in sortedProfiles" :key="p.id" cols="12">
+              <v-card :max-width="344" class="mx-auto" :elevation="20">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title class="headline">
+                      {{ p.name }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      rank:
+                      {{ sortedProfiles.indexOf(p) + 1 }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-img :src="p.imageURL" height="50vh" :key="p.id" :id="p.id">
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+
+                <v-card-text>{{ p.description }}</v-card-text>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    rounded
+                    color="error"
+                    x-large
+                    @click="superLike(p.id)"
+                    :disabled="myProfile.superLeft == 0"
+                  >
+                    <v-icon x-large>mdi-heart</v-icon>
+                    <span>{{ myProfile.superLeft }} left</span>
+                  </v-btn>
+                  <v-spacer></v-spacer>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-slide-y-transition>
         </div>
-      </v-expand-x-transition>
-      <div v-else>
-        <h1>here's where everyone stands.</h1>
-        <h2 v-if="myProfile.superLeft > 0">
-          you have {{ myProfile.superLeft }} more votes to pick your favorites!
-        </h2>
-        <h3>check back later for more spooky costumes</h3>
-
-        <v-slide-y-transition group>
-          <v-col v-for="p in sortedProfiles" :key="p.id" cols="12">
-            <v-card max-width="344" class="mx-auto">
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="headline">{{
-                    p.name
-                  }}</v-list-item-title>
-                  <v-list-item-subtitle
-                    >rank:
-                    {{ sortedProfiles.indexOf(p) + 1 }}</v-list-item-subtitle
-                  >
-                </v-list-item-content>
-              </v-list-item>
-
-              <v-img :src="p.imageURL" height="50vh">
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-
-              <v-card-text>{{ p.description }}</v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  rounded
-                  color="error"
-                  x-large
-                  @click="superLike(p.id)"
-                  :disabled="myProfile.superLeft == 0"
-                >
-                  <v-icon x-large>mdi-heart</v-icon>
-                  <span>{{ myProfile.superLeft }} left</span>
-                </v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-slide-y-transition>
-      </div>
+      </v-fade-transition>
     </v-col>
   </v-row>
 </template>
@@ -115,7 +120,8 @@ export default {
       profiles: [],
       myProfile: {
         superLeft: 0
-      }
+      },
+      intersectId: []
     };
   },
   mounted() {
@@ -190,6 +196,15 @@ export default {
         .update({
           superLeft: this.myProfile.superLeft - 1
         });
+    },
+    onIntersect(ent) {
+      if (ent[0].isIntersecting) {
+        this.intersectId.push(ent[0].target.id);
+      } else {
+        if (this.intersectId.indexOf(ent[0].target.id) >= 0) {
+          this.intersectId.splice(this.intersectId.indexOf(ent[0].target.id));
+        }
+      }
     }
   },
   computed: {

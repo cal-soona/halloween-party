@@ -4,7 +4,7 @@
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
-      <v-card>
+      <v-card elevation="10">
         <v-expand-transition>
           <v-form
             v-if="isCreate"
@@ -84,7 +84,7 @@
           </v-form>
         </v-expand-transition>
       </v-card>
-      <v-card>
+      <v-card elevation="10">
         <v-expand-transition>
           <v-form
             v-if="isVerify"
@@ -287,7 +287,7 @@ export default {
   outline-offset: -10px;
   color: dimgray;
   padding: 10px 10px;
-  height: 80px; /* minimum height */
+  height: 50vh; /* minimum height */
   position: relative;
   cursor: pointer;
 }
@@ -297,7 +297,7 @@ export default {
   width: 100%;
   top: 0px;
   left: 0px;
-  height: 80px;
+  height: 50vh;
   position: absolute;
   cursor: pointer;
 }
