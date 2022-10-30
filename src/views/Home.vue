@@ -49,6 +49,12 @@
           <div v-if="isEarly">
             <div class="timer-container">
               <div class="timer-block">
+                <div>{{ displayDays }}</div>
+                <div class="time-text">
+                  days
+                </div>
+              </div>
+              <div class="timer-block">
                 <div>{{ displayHours }}</div>
                 <div class="time-text">
                   hours
