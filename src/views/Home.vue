@@ -326,7 +326,7 @@ export default {
     endDate() {
       return this.config.length > 0
         ? new Date(this.config[0].endTime)
-        : new Date(1635651000000);
+        : new Date(1667707200000);
     },
     _seconds: () => 1000,
     _minutes() {
